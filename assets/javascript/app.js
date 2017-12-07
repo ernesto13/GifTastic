@@ -26,16 +26,15 @@ function displayAnimalInfo() {
 
             //naming the states of the still and animated gifs. when clicked animate does not work.
             var image = $("<img>").attr("src", animalGif[i].images.original_still.url);
+            image.addClass("gif");
             image.attr("data-still", animalGif[i].images.original_still.url);
-            image.attr("data-animate", animalGif[i].images.preview.mp4);
+            image.attr("data-animate", animalGif[i].images.original_mp4.mp4);
             image.attr("data-state", "still");
             // image.attr("data-state", "animate");
-            image.addClass("gif");
+
 
             // Appending the image
             animalDiv.append(image);
-
-
 
             $("#animals-view").prepend(animalDiv);
 
@@ -57,7 +56,6 @@ function displayAnimalInfo() {
                 // Then, set the image's data-state to animate
                 // Else set src to the data-still value
                 if (state === "still") {
-
                     $(this).attr("src", $(this).attr("data-animate"));
                     $(this).attr("data-state", "animate");
                 } else {
@@ -101,6 +99,7 @@ $("#add-animal").on("click", function(event) {
     event.preventDefault();
 
     var animal = $("#animal-input").val().trim();
+    animal
 
     topics.push(animal);
 
@@ -112,5 +111,5 @@ $("#add-animal").on("click", function(event) {
 // Adding a click event listener to all elements with a class of "animal"
 $(document).on("click", ".animal", displayAnimalInfo);
 
-// Calling the renderButtons function to display the intial buttons
+// Calling the renderButtons function to display the initial buttons
 renderButtons();
