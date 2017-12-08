@@ -2,6 +2,7 @@ var topics = ["Horse", "Shark", "Dog", "Lion", "Chupacabra", "Bigfoot"];
 var $; //this is for the editor to stop complaining that $ is not defined.
 // displayAnimalInfo function re-renders the HTML to display the appropriate content
 function displayAnimalInfo() {
+    console.log("displayAnimalInfo");
 
     var animal = $(this).attr("data-name");
 
@@ -15,7 +16,7 @@ function displayAnimalInfo() {
     }).done(function(response) {
         console.log(response);
         // Creating a div to hold animal gif
-        var animalDiv = $("<div class='animal'>");
+        var animalDiv = $("<div class='animalTest'>");
 
         var animalGif = response.data;
         for (var i = 0; i < animalGif.length; i++) {
@@ -48,27 +49,35 @@ function displayAnimalInfo() {
             animalDiv.append(pOne);
 
 
-            $(".gif").on("click", function(event) {
-                event.preventDefault();
-                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                var state = $(this).attr("data-state");
-                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                // Then, set the image's data-state to animate
-                // Else set src to the data-still value
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");
-                } else {
-                    $(this).attr("src", $(this).attr("data-still"));
-                    $(this).attr("data-state", "still");
-                }
-            });
+
 
         }
 
     });
 
 }
+
+
+$(".gif").on("click", function(event) {
+    event.preventDefault();
+    console.log(".gif");
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+});
+
+
+
+
 
 // Function for displaying movie data
 function renderButtons() {
@@ -97,7 +106,7 @@ function renderButtons() {
 // This function handles events where a animal button is clicked
 $("#add-animal").on("click", function(event) {
     event.preventDefault();
-
+    console.log("#add-animal");
     var animal = $("#animal-input").val().trim();
     animal
 
